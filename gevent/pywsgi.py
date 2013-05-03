@@ -247,7 +247,7 @@ class WSGIHandler(object):
             if content_length < 0:
                 self.log_error('Invalid Content-Length: %r', content_length)
                 return
-            if content_length and self.command in ('GET', 'HEAD'):
+            if content_length and self.command in ('HEAD', ):
                 self.log_error('Unexpected Content-Length')
                 return
 
@@ -461,13 +461,11 @@ class WSGIHandler(object):
 
     def format_request(self):
         now = datetime.now().replace(microsecond=0)
+        length = self.response_length or '-'
         if self.time_finish:
             delta = '%.6f' % (self.time_finish - self.time_start)
-            length = self.response_length
         else:
             delta = '-'
-            if not self.response_length:
-                length = '-'
         return '%s - - [%s] "%s" %s %s %s' % (
             self.client_address[0],
             now,

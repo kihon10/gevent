@@ -4,8 +4,8 @@ Changelog
 .. currentmodule:: gevent
 
 
-Release 1.0rc2
---------------
+Release 1.0rc2 (Dec 10, 2012)
+-----------------------------
 
 - Fixed #210: callbacks were not run for non-default loop (bug introduced in 1.0rc1).
 - patch_all() no longer patches subprocess unless `subprocess=True` is passed.
@@ -20,8 +20,8 @@ Release 1.0rc2
 - Allow for explicit default loop creation via `get_hub(default=True)`. Patch by Jan-Philip Gehrcke.
 
 
-Release 1.0rc1
---------------
+Release 1.0rc1 (Oct 30, 2012)
+-----------------------------
 
 - Fixed hub.switch() not to touch stacktrace when switching. greenlet restores the exception information correctly since version 0.3.2. gevent now requires greenlet >= 0.3.2
 - Added gevent.wait() and gevent.iwait(). This is like gevent.joinall() but supports more objects, including Greenlet, Event, Semaphore, Popen. Without arguments it waits for the event loop to finish (previously gevent.run() did that). gevent.run will be removed before final release and gevent.joinall() might be deprecated.
@@ -97,8 +97,8 @@ Misc:
 - the testrunner was completely rewritten.
 
 
-Release 1.0b4
--------------
+Release 1.0b4 (Sep 6, 2012)
+---------------------------
 
 - Added gevent.os module with 'read' and 'write' functions. Patch by Geert Jansen.
 - Moved gevent.hub.fork to gevent.os module (it is still available as gevent.fork).
@@ -107,8 +107,8 @@ Release 1.0b4
 - Fixed AttributeError in baseserver. In case of error, start() would call kill() which was renamed to close(). Thanks to Vitaly Kruglikov.
 
 
-Release 1.0b3
--------------
+Release 1.0b3 (Jul 27, 2012)
+----------------------------
 
 - New gevent.subprocess module
 - New gevent.fileobject module
@@ -134,8 +134,8 @@ Release 1.0b3
 - testrunner.py now saves more information about the system; the stat printing functionality is moved to a separate util/stat.py script.
 
 
-Release 1.0b2
--------------
+Release 1.0b2 (Apr 11, 2012)
+----------------------------
 
 Major and backward-incompatible changes:
 
@@ -186,8 +186,8 @@ Developer utilities:
 - Made testrunner.py kill the whole process group after test is done.
 
 
-Release 1.0b1
--------------
+Release 1.0b1 (Jan 10, 2012)
+----------------------------
 
 Backward-incompatible changes:
 
@@ -278,8 +278,8 @@ coros:
 
 
 
-Release 1.0a3
--------------
+Release 1.0a3 (Sep 15, 2011)
+----------------------------
 
 Added 'ref' property to all watchers. Settings it to False make watcher call ev_unref/ev_ref appropriately so that this watcher does not prevent loop.run()/hub.join()/run() from exiting.
 Made resolver_ares.Resolver use 'ref' property for internal watcher.
@@ -329,14 +329,14 @@ pywsgi: make sure we don't try to read more requests if socket operation failed 
 pywsgi: if we failed to send the reply, change 'status' to socket error so that the logs mention the error.
 
 
-Release 1.0a2
--------------
+Release 1.0a2 (Aug 2, 2011)
+---------------------------
 
 Fixed a bug in gevent.queue.Channel class. (Thanks to Alexey Borzenkov)
 
 
-Release 1.0a1
--------------
+Release 1.0a1 (Aug 2, 2011)
+---------------------------
 
 TODO:
 - gevent.http?
@@ -412,6 +412,23 @@ Miscellaneous:
 - The :class:`WSGIServer` now sets `max_accept` to 1 if `wsgi.multiprocessing` is set to `True`.
 - Added :func:`monkey.patch_module` function that monkey patches module using `__implements__` list provided by gevent module.
   All of gevent modules that replace stdlib module now have `__implements__` attribute.
+
+
+Release 0.13.8 (September 6, 2012)
+----------------------------------
+
+- Fixed issue #80: gevent.httplib failed with RequestFailed errors because timeout was reset to 1s. Patch by Tomasz Prus.
+- core: fix compilation with the latest Cython: remove emit_ifdef/emit_else/emit_endif.
+- Fixed issue #132: gevent.socket.gethostbyname(<unicode>) now does ascii encoding and uses gevent's resolver rather than calling built-in resolver. Patch by Alexey Borzenkov.
+
+
+Release 0.13.7 (April 12, 2012)
+-------------------------------
+
+- Fixed #94: fallback to buffer if memoryview fails in _get_memory on python 2.7.
+- Fixed #103: ``Queue(None).full()`` returns ``False`` now (previously it returned ``True``).
+- Fixed #112: threading._sleep is not patched. Thanks to David LaBissoniere.
+- Fixed #115: _dummy gets unexpected Timeout arg.
 
 
 Release 0.13.6 (May 2, 2011)
